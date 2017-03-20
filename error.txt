@@ -1,0 +1,9 @@
+Exit Code:
+
+     0: Safely executed command
+
+     3: Too many keywords in User Input i.e. $ todolist init add Project
+
+     4: No command provided i.e. $ todolist
+
+     5: Save File is unwritable, manually delete file from .saves
