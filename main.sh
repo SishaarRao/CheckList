@@ -35,11 +35,20 @@ init (){
     ! [[ $1 =~ ^[A-Za-z_]+$ ]] && echo "Error Code 3: Incorrect Parameter Formatting" && exit 3
     
     echo "Params:" $1
-    # Write Data to a JSON file
+    # Create File Path, make sure it is unique
     file="./.saves/$1.json"
-    # Check if file exists and is writable, if not create the file
-    ( [ -e "$file" ] || touch "$file" ) && [ ! -w "$file" ] && echo "Error Code 5: $file is unwritable. Todolist has deleted Save File" && rm "$file" && exit 5
+    [[ -e "$file" ]] && echo "Error Code 3: File already exists" && exit 3
+    
+    # Create file, make sure it is writable
+    touch "$file" && [ ! -w "$file" ] && echo "Error Code 5: $file is unwritable. Todolist has deleted Save File" && rm "$file" && exit 5
 
+    cat > $file <<EOF
+{
+    "List":[
+]
+}
+EOF
+    
     exit 0
 }
 
