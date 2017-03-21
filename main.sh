@@ -9,7 +9,7 @@
 . ./.dependencies/ticktick.sh
 
 
-KEYWORDS=("init" "list" "add" "remove" "complete")
+KEYWORDS=("init" "list" "add" "remove" "complete" "--version" "-v")
 
 __tokenize (){
     # Verify that param isn't empty
@@ -33,6 +33,15 @@ init (){
     exit 0
 }
 
+--version (){
+    echo "Checklist 1.1"
+    echo "Created by Sishaar Rao"
+    exit 0
+}
+-v (){
+    a="--version"
+    "${a}"
+}
 list (){
     echo "This is the function for listing the contents of a list"
     echo "Params:" $*
