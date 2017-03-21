@@ -29,7 +29,17 @@ __tokenize (){
 
 init (){
     echo "This is the function for initializing a new list"
-    echo "Params:" $*
+    # Ensure correct number of parameters
+    # Ensure correct formatting of parameters
+    [[ $# != 1 ]] && echo "Error Code 3: Incorrect Number of Parameters" && exit 3
+    ! [[ $1 =~ ^[A-Za-z_]+$ ]] && echo "Error Code 3: Incorrect Parameter Formatting" && exit 3
+    
+    echo "Params:" $1
+    # Write Data to a JSON file
+    file="./.saves/$1.json"
+    # Check if file exists and is writable, if not create the file
+    ( [ -e "$file" ] || touch "$file" ) && [ ! -w "$file" ] && echo "Error Code 5: $file is unwritable. Todolist has deleted Save File" && rm "$file" && exit 5
+
     exit 0
 }
 
