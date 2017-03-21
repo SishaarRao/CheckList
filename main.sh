@@ -42,13 +42,13 @@ init (){
     # Create file, make sure it is writable
     touch "$file" && [ ! -w "$file" ] && echo "Error Code 5: $file is unwritable. Todolist has deleted Save File" && rm "$file" && exit 5
 
+    # Write to file
     cat > $file <<EOF
 {
     "List":[
 ]
 }
 EOF
-    
     exit 0
 }
 
@@ -58,12 +58,19 @@ EOF
     exit 0
 }
 -v (){
+    # This is ridiculous I know but for some reason ${--version} won't work so I think I'm still a plebe at shell
     a="--version"
     "${a}"
 }
+
 list (){
     echo "This is the function for listing the contents of a list"
     echo "Params:" $*
+    # Print all the available lists
+    if [[ $# == 0 ]]; then
+	ls ./.saves/
+    fi
+    
     exit 0
 }
 
