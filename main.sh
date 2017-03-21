@@ -12,26 +12,17 @@
 KEYWORDS=("init" "list" "add" "remove" "complete")
 
 __tokenize (){
-
     # Verify that param isn't empty
-    if [[ -z $*  ]]; then
-	echo "Error Code 4: No command provided"
-	exit 4
-    fi
+    # Set first param to command if it's a keyword
+    # Verify that first param is command
     
-    command=""
-    # Parse through params, get command
-    for param in $*; do
-	if [[ "$command" != "" ]] && [[ " ${KEYWORDS[*]} " == *" $param "* ]]; then
-	    echo "Error Code 3: Too many keywords in input"
-	    exit 3
-	fi
-	if [[ "$command" == "" ]] && [[ " ${KEYWORDS[*]} " == *" $param "* ]]; then
-	    command="$param"
-	    break
-	fi
-    done
-
+    if [[ -z $*  ]]; then
+	echo "Error Code 4: No command provided"; exit 4;
+    elif [[ "${KEYWORDS[*]}" == *"$1"* ]]; then
+	command="$1"
+    else
+	echo "Error Code 4: No command provided"; exit 4;
+    fi
     ${command} ${@:2}
 }
 
