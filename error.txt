@@ -2,8 +2,8 @@ Exit Code:
 
      0: Safely executed command
 
-     3: Incorrect keywords/parameters
+     3: Bad keywords/parameters
 
      4: No command provided i.e. $ todolist
 
-     5: Save File is unwritable, manually delete file from .saves
+     5: Save File is unwritable, automanually deletes file from .saves
