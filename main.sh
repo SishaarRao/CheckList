@@ -68,7 +68,11 @@ list (){
     echo "Params:" $*
     # Print all the available lists
     if [[ $# == 0 ]]; then
-	ls ./.saves/
+	content=`cd .saves/; ls *.json; cd ..;`
+	printf "Here are your`wc -w <<< "$content" | tr -s ' '` list(s)!\n"
+	for list in $content; do
+	    echo ${list:0:${#list}-5}
+	done
     fi
     
     exit 0
